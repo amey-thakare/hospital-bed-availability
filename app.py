@@ -133,4 +133,4 @@ def hospital_logout():
 
 # ---------- RUN SERVER (ALWAYS LAST) ----------
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()
