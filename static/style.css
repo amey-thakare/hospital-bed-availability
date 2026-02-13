@@ -1,0 +1,195 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f6f8;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+}
+
+.hospital {
+  background: white;
+  padding: 15px;
+  margin: 15px auto;
+  width: 300px;
+  border-radius: 8px;
+}
+
+.beds {
+  font-weight: bold;
+  color: green;
+}
+/* -------- Hospital Login Page -------- */
+
+.container {
+  max-width: 400px;
+  margin: 100px auto;
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.container h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #2c3e50;
+}
+
+.container form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.container input {
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.container button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px;
+  font-size: 15px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.container button:hover {
+  background-color: #0056b3;
+}
+
+.container p {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+/* -------- Hospital Dashboard -------- */
+
+.dashboard-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #f4f6f8;
+}
+
+.dashboard-card {
+  background: #ffffff;
+  padding: 35px;
+  width: 380px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+  text-align: center;
+}
+
+.dashboard-card h2 {
+  margin-bottom: 25px;
+  color: #2c3e50;
+}
+
+.bed-status {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #eaf4ff;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+.bed-count {
+  background: #28a745;
+  color: white;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-weight: bold;
+}
+
+.update-form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.update-form input {
+  flex: 1;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.update-form button {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.update-form button:hover {
+  background: #0056b3;
+}
+
+.back-link {
+  display: inline-block;
+  margin-top: 10px;
+  color: #007bff;
+  text-decoration: none;
+  font-size: 14px;
+}
+/* -------- Hospital Login Button -------- */
+
+.login-btn-wrapper {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.login-btn {
+  display: inline-block;
+  background: #28a745;
+  color: white;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 30px;
+  text-decoration: none;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+}
+
+.login-btn:hover {
+  background: #218838;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+/* -------- Logout Button -------- */
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.logout-btn {
+  background: #dc3545;
+  color: white;
+  padding: 6px 14px;
+  border-radius: 20px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.logout-btn:hover {
+  background: #c82333;
+}

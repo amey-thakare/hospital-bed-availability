@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hospital Bed Availability</title>
+  <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
+</head>
+<body>
+<h1>🏥 Hospital Bed Availability</h1>
+
+{% for hospital in hospitals %}
+  <div class="hospital">
+    <h2>{{ hospital[0] }}</h2>
+
+    <p>
+      Available Beds:
+      <span class="beds">{{ hospital[1] }}</span>
+    </p>
+
+    <form method="POST" action="/update">
+      <input type="hidden" name="name" value="{{ hospital[0] }}">
+      <input type="number" name="beds" min="0" required>
+      <button type="submit">Update Beds</button>
+    </form>
+
+  </div>
+{% endfor %}
+
+
+
+
+  <script src="{{url_for('static',filename='script.js')}}"></script>
+</body>
+</html>

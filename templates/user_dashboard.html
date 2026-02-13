@@ -1,0 +1,18 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+<h1>🏥 Hospital Bed Availability</h1>
+
+{% for hospital in hospitals %}
+  <div class="hospital">
+    <h2>{{ hospital[0] }}</h2>
+    <p>Available Beds: {{ hospital[1] }}</p>
+  </div>
+{% endfor %}
+
+<div class="login-btn-wrapper">
+  <a href="/hospital/login" class="login-btn">
+    🏥 Hospital Login
+  </a>
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>

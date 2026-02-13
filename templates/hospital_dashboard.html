@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hospital Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="dashboard-container">
+  <div class="dashboard-card">
+    <div class="dashboard-header">
+  <h2>🏥 Welcome {{ name }}</h2>
+<a href="/hospital/logout"
+   class="logout-btn"
+   onclick="return confirmLogout()">
+   Logout
+</a>
+</div>
+
+
+    <div class="bed-status">
+      <span>Available Beds</span>
+      <span class="bed-count">{{ beds }}</span>
+    </div>
+
+    <form method="POST" action="/hospital/update" class="update-form">
+      <input type="number" name="beds" min="0" required placeholder="Enter new bed count">
+      <button type="submit">Update Beds</button>
+    </form>
+
+    <a href="/" class="back-link">← Go to User View</a>
+  </div>
+</div>
+
+</body>
+</html>
