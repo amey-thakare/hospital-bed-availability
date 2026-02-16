@@ -2,13 +2,47 @@ print("THIS app.py IS RUNNING")
 
 from flask import Flask, render_template, request, redirect, session
 import sqlite3
-from werkzeug.security import check_password_hash
-from werkzeug.security import generate_password_hash
-
+import os
+from werkzeug.security import check_password_hash, generate_password_hash
 
 app = Flask(__name__)
 app.secret_key = "super_secret_key"
 
+
+# =========================
+# DATABASE INITIALIZATION
+# =========================
+def init_db():
+    conn = sqlite3.connect("hospital.db")
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS hospitals (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT UNIQUE,
+            available_beds INTEGER
+        )
+    """)
+
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS hospital_users (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT UNIQUE,
+            password TEXT
+        )
+    """)
+
+    conn.commit()
+    conn.close()
+
+
+# Create tables automatically on startup
+init_db()
+
+
+# =========================
+# HELPER FUNCTION
+# =========================
 def get_hospitals():
     conn = sqlite3.connect("hospital.db")
     cursor = conn.cursor()
@@ -17,13 +51,19 @@ def get_hospitals():
     conn.close()
     return data
 
-# ---------- USER DASHBOARD ----------
+
+# =========================
+# USER DASHBOARD
+# =========================
 @app.route("/")
 def user_dashboard():
     hospitals = get_hospitals()
     return render_template("user_dashboard.html", hospitals=hospitals)
 
-# ---------- HOSPITAL LOGIN ----------
+
+# =========================
+# HOSPITAL LOGIN
+# =========================
 @app.route("/hospital/login", methods=["GET", "POST"])
 def hospital_login():
     if request.method == "POST":
@@ -47,6 +87,10 @@ def hospital_login():
 
     return render_template("hospital_login.html")
 
+
+# =========================
+# HOSPITAL DASHBOARD
+# =========================
 @app.route("/hospital/dashboard")
 def hospital_dashboard():
     if "hospital" not in session:
@@ -60,8 +104,10 @@ def hospital_dashboard():
         "SELECT available_beds FROM hospitals WHERE name=?",
         (name,)
     )
-    beds = cursor.fetchone()[0]
+    row = cursor.fetchone()
     conn.close()
+
+    beds = row[0] if row else 0
 
     return render_template(
         "hospital_dashboard.html",
@@ -69,6 +115,10 @@ def hospital_dashboard():
         beds=beds
     )
 
+
+# =========================
+# UPDATE BEDS
+# =========================
 @app.route("/hospital/update", methods=["POST"])
 def update_beds():
     if "hospital" not in session:
@@ -88,6 +138,10 @@ def update_beds():
 
     return redirect("/hospital/dashboard")
 
+
+# =========================
+# HOSPITAL SIGNUP
+# =========================
 @app.route("/hospital/signup", methods=["GET", "POST"])
 def hospital_signup():
     if request.method == "POST":
@@ -124,13 +178,18 @@ def hospital_signup():
     return render_template("hospital_signup.html")
 
 
+# =========================
+# LOGOUT
+# =========================
 @app.route("/hospital/logout")
 def hospital_logout():
     session.pop("hospital", None)
     return redirect("/hospital/login")
 
 
-
-# ---------- RUN SERVER (ALWAYS LAST) ----------
+# =========================
+# RUN SERVER (Render Compatible)
+# =========================
 if __name__ == "__main__":
-    app.run()
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host="0.0.0.0", port=port)
