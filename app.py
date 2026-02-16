@@ -38,6 +38,13 @@ def init_db():
             password TEXT
         )
     """)
+        # Create default admin if not exists
+    cursor.execute("SELECT * FROM admin_users WHERE username=?", ("admin",))
+    if not cursor.fetchone():
+        cursor.execute(
+            "INSERT INTO admin_users (username, password) VALUES (?, ?)",
+            ("admin", generate_password_hash("admin123"))
+        )
 
     conn.commit()
     conn.close()
