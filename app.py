@@ -200,6 +200,33 @@ def hospital_logout():
     session.pop("hospital", None)
     return redirect("/hospital/login")
 
+# =========================
+# ADMIN LOGIN
+# =========================
+@app.route("/admin/login", methods=["GET", "POST"])
+def admin_login():
+    if request.method == "POST":
+        username = request.form["username"]
+        password = request.form["password"]
+
+        conn = sqlite3.connect("hospital.db")
+        cursor = conn.cursor()
+        cursor.execute(
+            "SELECT password FROM admin_users WHERE username=?",
+            (username,)
+        )
+        row = cursor.fetchone()
+        conn.close()
+
+        if row and check_password_hash(row[0], password):
+            session["admin"] = username
+            return redirect("/admin/dashboard")
+        else:
+            return "Invalid admin login"
+
+    return render_template("admin_login.html")
+
+
 
 # =========================
 # RUN SERVER (Render Compatible)
